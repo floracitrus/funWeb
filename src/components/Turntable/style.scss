@@ -1,0 +1,50 @@
+@mixin clearfix(){
+  &::before,&::after{
+    clear:both;
+    content:"";
+    display: table;
+    zoom: 1;
+  }
+}
+.react-turntable-section{
+    $click-btn-color: #31c27c;
+    $btn-width:80px;
+    $btn-height:$btn-width;
+    position: relative;
+    @include clearfix();
+    &-canvas{
+        display: block;
+        pointer-events: none;
+    }
+    &-btn{
+        width:$btn-width;
+        height:$btn-height;
+        line-height: $btn-height;
+        border-radius: 50%;
+        box-shadow: 0 0 5px rgba(0,0,0,.1);
+        border:2px solid #fff;
+        color:#fff;
+        background: $click-btn-color;
+        text-align: center;
+        font-size:16px;
+        font-weight: bold;
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        margin:auto;
+        cursor: pointer;
+        z-index: 2;
+        &::before{
+            content:"";
+            position: absolute;
+            border:20px solid transparent;
+            border-bottom-color:$click-btn-color;
+            left:50%;
+            margin-left:-20px;
+            top:-30px;
+            z-index: 1;
+        }
+    }
+}
