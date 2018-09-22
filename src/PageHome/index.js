@@ -1,10 +1,12 @@
 import React from "react";
-import { Layout, Button } from "antd";
+import { Layout, Button, Input, Form } from "antd";
 //import "react-turntable/assets/index.css"
 import NavBar from "src/components/NavBar";
 import _Footer from "src/components/Footer";
 import ReactTurntable from "src/components/Turntable";
 import DynamicFieldSet from "src/components/DynamicFieldSet";
+
+
 const { Header, Content, Footer } = Layout;
 const prizes = [
     'Yong Tou Fu', 'Hainan Chicken Rice', '3Veg+1rice',
@@ -45,9 +47,11 @@ const styles = {
     alignContent:"center",
     display:"flex"
 }
+const WrappedDynamicFieldSet = Form.create()(DynamicFieldSet);
 
 
 class PageHome extends React.PureComponent {
+
   render() {
     return (
       <Layout>
@@ -55,15 +59,31 @@ class PageHome extends React.PureComponent {
           <NavBar />
         </Header>
         <Content style={{ padding: "0 50px" }}>
-          <div
-            style={{
-              fontWeight: "bold",
-              marginTop: "2rem",
-              fontSize: "1.5rem"
-            }}
+          <h1
           >
             What do you want to eat today?
+          </h1>
+
+          <div style={{
+            fontWeight: "bold",
+            marginTop: "2rem",
+            fontSize: "1.2rem"
+          }}>
+          是哪个食物小可爱这么幸运要被我吃了呢：-)
           </div>
+
+          <div style={{
+            fontWeight: "bold",
+            marginTop: "2rem",
+            fontSize: "1rem"
+          }}>
+          You can add more food you like which is not on the turntable
+          </div>
+
+          <div align="left">
+          <WrappedDynamicFieldSet />
+          </div>
+
           <div style = {styles}>
             <ReactTurntable {...options} />
             </div>
