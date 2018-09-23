@@ -13,6 +13,7 @@ const prefix = 'react-turntable';
 
 export default class ReactTurntable extends PureComponent {
   state = {
+    prizes:[],
     isRotate: false,
     startRotate: 0
   };
@@ -33,7 +34,13 @@ export default class ReactTurntable extends PureComponent {
     Color1: '#EE964B',
     Color2:'#D0E3CC',
     Color3:'#986C6A',
+    fontStyle:{
+        color:"#000",
+        size:"15px",
+        fontVertical:true,
+        fontWeight:"bold",
 
+    },
     onStart: () => true
   };
   static propTypes = {
@@ -52,6 +59,13 @@ export default class ReactTurntable extends PureComponent {
     fontVertical: PropTypes.bool,
     fontStyle: PropTypes.object
   };
+
+  handleChange(prizelist){
+   this.setState(state => ({
+       prizes: prizelist
+     }));
+  }
+
   render() {
     const {
       clickText,
@@ -83,6 +97,7 @@ export default class ReactTurntable extends PureComponent {
         <canvas
           id="react-turntable-section-canvas"
           ref={node => (this.canvas = node)}
+          onChange={() => this.handleChange()}
         />
         <div style={{ marginTop: "1rem" }}>
           <Button type="primary" onClick = {this.onStartRotate} >Select</Button>

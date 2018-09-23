@@ -8,30 +8,10 @@ import DynamicFieldSet from "src/components/DynamicFieldSet";
 
 
 const { Header, Content, Footer } = Layout;
-const prizes = [
-    'Yong Tou Fu', 'Hainan Chicken Rice', '3Veg+1rice',
-    'Seng Chicken soup', 'Beef Noodle', 'Pork Noodle',
-    'Cha shao Bao','Mcdonald', 'KFC', 'Porridge',
-]
+var prizes = ['肥宅鸡','麦当劳','宫保鸡丁','炒土豆丝','包子','饺子','牛肉米粉','牛肉面','烤茄子鱼','麻辣烫','拉咖撒','凉皮','肉夹馍']
 
-const options = {
+var options = {
     prizes,
-    width: 500,
-    height: 500,
-    Color0: '#F4D35E',
-    Color1: '#EE964B',
-    Color2:'#D0E3CC',
-    Color3:'#986C6A',
-    fontStyle:{
-        color:"#fff",
-        size:"14px",
-        fontVertical:true,
-        fontWeight:"bold",
-
-    },
-    speed : 1000,
-    duration:5000,
-    clickText:"Click",
     onStart(){
       //If you want before the rotate do some...
       console.log('start...');
@@ -51,7 +31,22 @@ const WrappedDynamicFieldSet = Form.create()(DynamicFieldSet);
 
 
 class PageHome extends React.PureComponent {
-
+  constructor(props){
+    super(props);
+    this.state = {option: options
+    };
+    this.onUpdate = this.onUpdateOptions.bind(this);
+  }
+  static foodoptions = [
+      'MC', 'KFC', 'Healthy style'
+  ];
+  onUpdateOptions = (optList) => {
+    options.prizes = optList;
+    this.setState(state => ({
+        option: options
+      }));
+    console.log("parent states ", this.state.option );
+  }
   render() {
     return (
       <Layout>
@@ -81,11 +76,11 @@ class PageHome extends React.PureComponent {
           </div>
 
           <div align="left">
-          <WrappedDynamicFieldSet />
+          <WrappedDynamicFieldSet onUpdate = {this.onUpdateOptions}/>
           </div>
 
           <div style = {styles}>
-            <ReactTurntable {...options} />
+            <ReactTurntable  {...this.state.option} />
             </div>
 
         </Content>

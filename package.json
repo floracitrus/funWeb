@@ -17,6 +17,8 @@
   "dependencies": {
     "antd": "^3.9.2",
     "babel-polyfill": "^6.26.0",
+    "firebase": "^5.5.1",
+    "firebase-tools": "^4.2.1",
     "less": "^3.8.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
