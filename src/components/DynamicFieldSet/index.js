@@ -6,14 +6,14 @@ import { Form, Input, Icon, Button } from 'antd';
 const FormItem = Form.Item;
 
 let uuid = 0;
-const initial_prizes = [
-    'MC', 'KFC', 'Healthy style'
-]
+// const initial_prizes = [
+//     'MC', 'KFC', 'Healthy style'
+// ]
 export default class DynamicFieldSet extends React.Component {
 
   constructor(props) {
       super(props);
-      this.state = {value:initial_prizes}
+      // this.state = {value:initial_prizes}
       this.handleSubmit = this.handleSubmit.bind(this);
    }
   remove = (k) => {
@@ -48,10 +48,10 @@ export default class DynamicFieldSet extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-        this.setState({ value: values},
+        console.log('Received values of form: ', values.names);
+        this.setState({ value: values.names},
           function(){console.log('value in the state ', this.state.value);});
-        this.props.onUpdate(values);
+        this.props.onUpdate(values.names);
       }
     });
   }

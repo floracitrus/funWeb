@@ -13,7 +13,6 @@ const prefix = 'react-turntable';
 
 export default class ReactTurntable extends PureComponent {
   state = {
-    prizes:[],
     isRotate: false,
     startRotate: 0
   };
@@ -60,11 +59,11 @@ export default class ReactTurntable extends PureComponent {
     fontStyle: PropTypes.object
   };
 
-  handleChange(prizelist){
-   this.setState(state => ({
-       prizes: prizelist
-     }));
-  }
+  // handleChange(prizelist){
+  //  this.setState({
+  //      prizes: prizelist
+  //    });
+  // }
 
   render() {
     const {
@@ -97,7 +96,6 @@ export default class ReactTurntable extends PureComponent {
         <canvas
           id="react-turntable-section-canvas"
           ref={node => (this.canvas = node)}
-          onChange={() => this.handleChange()}
         />
         <div style={{ marginTop: "1rem" }}>
           <Button type="primary" onClick = {this.onStartRotate} >Select</Button>
@@ -274,6 +272,18 @@ export default class ReactTurntable extends PureComponent {
   }
   componentWillUnmount() {
     this.destroyContext();
+  }
+  componentDidUpdate() {
+    console.log("Updated!!", this.props);
+    this.prizes = this.props.prizes;
+    this.awardRotate = (Math.PI * 2) / this.prizes.length;
+    this.drawTurntable();
+    console.log("props now", this.props);
+  }
+  componentWillReceiveProps(receivedProps) {
+    console.log("Received props!", receivedProps, "this props", this.props.prizes);
+    // this.prizes = Array.from(this.props.prizes);
+    this.forceUpdate();
   }
   onStartRotate = () => {
     const { speed, duration, onStart } = this.props;
