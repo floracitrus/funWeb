@@ -59,12 +59,6 @@ export default class ReactTurntable extends PureComponent {
     fontStyle: PropTypes.object
   };
 
-  // handleChange(prizelist){
-  //  this.setState({
-  //      prizes: prizelist
-  //    });
-  // }
-
   render() {
     const {
       clickText,
@@ -120,13 +114,9 @@ export default class ReactTurntable extends PureComponent {
     this.startRotate += _rotateChange;
     this.drawTurntable();
     this.drawTriangle();
-
-
-
-
-
     this.animateId = requestAnimationFrame(this.rotateTurntable);
   };
+
   getSelectedPrize = () => {
     let startAngle = (this.startRotate * 180) / Math.PI,
       awardAngle = (this.awardRotate * 180) / Math.PI,
@@ -134,7 +124,6 @@ export default class ReactTurntable extends PureComponent {
       overAngle = (startAngle + pointerAngle) % 360,
       restAngle = 360 - overAngle,
       index = Math.floor(restAngle / awardAngle);
-
     return this.prizes[index];
   };
 
@@ -228,11 +217,8 @@ export default class ReactTurntable extends PureComponent {
         ctx.translate(0, Math.min(fontWidth, 25));
         ctx.rotate((90 / 180) * Math.PI);
       }
-
       ctx.fillText(prize, -fontWidth / 2, 0);
-
       ctx.closePath();
-
       ctx.restore();
     }
   }
@@ -277,7 +263,9 @@ export default class ReactTurntable extends PureComponent {
     console.log("Updated!!", this.props);
     this.prizes = this.props.prizes;
     this.awardRotate = (Math.PI * 2) / this.prizes.length;
+
     this.drawTurntable();
+    this.drawTriangle();
     console.log("props now", this.props);
   }
   componentWillReceiveProps(receivedProps) {
